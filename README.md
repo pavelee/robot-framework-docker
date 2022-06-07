@@ -1,2 +1,5 @@
-# robot-framework-docker
-Light docker image to run your robots
+# Robot Framework Docker
+
+## What's that?
+
+Simple and light image to run your robots
