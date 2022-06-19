@@ -1,3 +1,5 @@
 *.*
 !*.robot
+!robot.yaml
+!conda.yaml
 !.gitignore

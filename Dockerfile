@@ -1,10 +1,10 @@
-FROM debian:bullseye-slim
+FROM --platform=linux/amd64 debian:bullseye-slim
 
 RUN apt-get update \
     && apt-get install -y \ 
     python3-pip python3-dev \
     libasound2 libdbus-glib-1-2 \
-    xvfb \
+    xvfb curl \
     nodejs npm;
 
 RUN pip3 install \
@@ -12,6 +12,10 @@ RUN pip3 install \
     robotframework-browser;
 
 RUN rfbrowser init
+
+RUN curl -o rcc https://downloads.robocorp.com/rcc/releases/latest/linux64/rcc
+RUN chmod a+x rcc
+RUN mv rcc /usr/local/bin/
 
 COPY entrypoint.sh /bin/entrypoint.sh
 RUN chmod -R +x /bin/entrypoint.sh
@@ -25,4 +29,5 @@ ENV ROBOT_PATH=/srv/robot
 
 WORKDIR /srv/robot
 
-CMD ["entrypoint.sh"]
+CMD  ["tail", "-f", "/dev/null"]
+# CMD ["entrypoint.sh"]

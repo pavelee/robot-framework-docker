@@ -21,8 +21,10 @@ docker build -t robot .
 ### Run example robot
 
 ```
-docker run -v `pwd`/robot:/srv/robot robot
+docker --platform linux/amd64 run -v `pwd`/robot:/srv/robot robot
 ```
+
+We are specifying platform to support ARM machines eg. MacBooks
 
 ### Just edit robot!
 
@@ -46,3 +48,6 @@ End Browser
     Close Browser
 
 ```
+
+### Install anaconda
+https://www.anaconda.com/products/distribution
