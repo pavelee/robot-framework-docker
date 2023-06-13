@@ -21,6 +21,12 @@ docker build -t robot .
 ### Run example robot
 
 ```
+docker run -v `pwd`/robot:/srv/robot robot
+```
+
+if you are using macos with appple silicon, add platform information
+
+```
 docker --platform linux/amd64 run -v `pwd`/robot:/srv/robot robot
 ```
 

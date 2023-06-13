@@ -1,11 +1,24 @@
-FROM --platform=linux/amd64 debian:bullseye-slim
+FROM --platform=linux/amd64 node:20.3.0-bullseye-slim
 
 RUN apt-get update \
     && apt-get install -y \ 
     python3-pip python3-dev \
     libasound2 libdbus-glib-1-2 \
-    xvfb curl \
-    nodejs npm;
+    xvfb curl;
+
+RUN apt-get install -y libgtk-3-0 \                      
+    libxcomposite1 \                              
+    libxrandr2 \                                  
+    libxrender1 \                                 
+    libxtst6 \                                    
+    libpangocairo-1.0-0 \                         
+    libpango-1.0-0 \                             
+    libatk1.0-0 \                                
+    libcairo-gobject2 \                          
+    libcairo2 \                                  
+    libgdk-pixbuf-2.0-0 \                        
+    libxcursor1 \                                
+    libxi6;
 
 RUN pip3 install \
     robotframework \
@@ -27,7 +40,9 @@ ENV SCREEN_WIDTH 1920
 ENV ROBOT_OPTIONS=
 ENV ROBOT_PATH=/srv/robot
 
+COPY robot /srv/robot
+
 WORKDIR /srv/robot
 
-CMD  ["tail", "-f", "/dev/null"]
-# CMD ["entrypoint.sh"]
+# CMD  ["tail", "-f", "/dev/null"]
+CMD ["entrypoint.sh"]
